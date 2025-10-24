@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+ 
+  <title>Attendance — Exercise 1</title>
+  <style>
+   /* Base: mobile first */
+body { font-family: Arial; margin: 24px; }
+.navbar { background-color: #2b6a4a; padding: 10px; }
+.navbar ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; }
+.navbar a { color: white; text-decoration: none; font-weight: bold; }
+.navbar a:hover { text-decoration: underline; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+thead th { background: #f4f4f4; }
+input[type="checkbox"] { transform: scale(1.1); }
+input, button { width: 100%; margin-top: 10px; }
+
+/* Tablet (min 768px) */
+@media (min-width: 768px) {
+  .navbar ul { flex-direction: row; gap: 20px; }
+  table { font-size: 16px; }
+  input, button { width: 50%; }
+}
+
+/* Desktop (min 1024px) */
+@media (min-width: 1024px) {
+  table { max-width: 900px; }
+  input, button { width: 30%; }
+}
+
+  </style>
+</head>
+<body>
+
+  <h2>Exercise 1 — Student Attendance Table</h2>
+  <nav class="navbar">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Attendance List</a></li>
+    <li><a href="#">Add Student</a></li>
+    <li><a href="#">Reports</a></li>
+    <li><a href="#">Logout</a></li>
+  </ul>
+</nav>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Course</th>
+        <th colspan="2">Section Date</th>
+      </tr>
+
+      <tr>
+        <th colspan="4"></th>
+        <th>Participated</th>
+        <th>Present</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td> 31353614</td>
+        <td>sarah</td>
+        <td>khecha</td>
+        <td>paw</td>
+        <td> <input type= "checkbox" name = "Participated "> </td>
+        <td> <input type= "checkbox" name = "Present "> </td>
+      </tr>
+
+   <tr>
+        <td> 313586753</td>
+        <td>feriel</td>
+        <td>khoukhi</td>
+        <td>paw</td>
+        <td> <input type= "checkbox" name = "Participated "> </td>
+        <td> <input type= "checkbox" name = "Present "> </td>
+      </tr>
+       <tr>
+        <td> 3135389974</td>
+        <td>alex</td>
+        <td>ford</td>
+        <td>paw</td>
+        <td> <input type= "checkbox" name = "Participated "> </td>
+        <td> <input type= "checkbox" name = "Present "> </td>
+      </tr>
+    </tbody>
+  </table>
+
+ 
+  <h1> new student</h1>
+  <h3> student ID : </h3> <INPUT  type="text" name="student ID">
+  <h3> last name : </h3> <INPUT  type="text" name="last name">
+  <h3> first name: </h3> <INPUT  type="text" name="first name">
+  <h3> email : </h3> <INPUT  type="email" name="email">
+  <button type="submit"> submit </button>
+<script>
+  // Select the submit button
+  const button = document.querySelector("button");
+
+  button.addEventListener("click", function() {
+    // Get input values
+    const id = document.querySelector('input[name="student ID"]').value;
+    const last = document.querySelector('input[name="last name"]').value;
+    const first = document.querySelector('input[name="first name"]').value;
+    const email = document.querySelector('input[name="email"]').value;
+
+    // Get the table body
+    const tableBody = document.querySelector("tbody");
+
+    // Create a new row and fill it
+    const newRow = document.createElement("tr");
+    newRow.innerHTML =
+      "<td>" + id + "</td>" +
+      "<td>" + last + "</td>" +
+      "<td>" + first + "</td>" +
+      "<td>" + email + "</td>" +
+      "<td><input type='checkbox' name='Participated'></td>" +
+      "<td><input type='checkbox' name='Present'></td>";
+
+    // Add the new row to the table
+    tableBody.appendChild(newRow);
+
+    // Clear input fields
+    document.querySelector('input[name="student ID"]').value = "";
+    document.querySelector('input[name="last name"]').value = "";
+    document.querySelector('input[name="first name"]').value = "";
+    document.querySelector('input[name="email"]').value = "";
+  });
+</script>
+</body>
+</html>
