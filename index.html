@@ -1,135 +1,234 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
- 
-  <title>Attendance — Exercise 1</title>
+  <meta charset="UTF-8" />
+  <title>Attendance System — Small Donut + Ex5/6</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-   /* Base: mobile first */
-body { font-family: Arial; margin: 24px; }
-.navbar { background-color: #2b6a4a; padding: 10px; }
-.navbar ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; }
-.navbar a { color: white; text-decoration: none; font-weight: bold; }
-.navbar a:hover { text-decoration: underline; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-thead th { background: #f4f4f4; }
-input[type="checkbox"] { transform: scale(1.1); }
-input, button { width: 100%; margin-top: 10px; }
-
-/* Tablet (min 768px) */
-@media (min-width: 768px) {
-  .navbar ul { flex-direction: row; gap: 20px; }
-  table { font-size: 16px; }
-  input, button { width: 50%; }
-}
-
-/* Desktop (min 1024px) */
-@media (min-width: 1024px) {
-  table { max-width: 900px; }
-  input, button { width: 30%; }
-}
-
+    body{font-family:Arial,sans-serif;margin:20px;background:#f9f9f9;}
+    nav{background:#0077cc;padding:10px;border-radius:8px;}
+    nav a{color:#fff;margin:0 10px;text-decoration:none;}
+    table{border-collapse:collapse;width:100%;margin-top:20px;background:#fff;}
+    th,td{border:1px solid #ccc;padding:8px;text-align:center;}
+    th{background:#0077cc;color:#fff;}
+    .green{background:#c8e6c9;}
+    .yellow{background:#fff9c4;}
+    .red{background:#ffcdd2;}
+    form{background:#fff;padding:15px;margin-top:20px;border-radius:8px;}
+    .error{color:red;font-size:0.9em;display:block;margin-bottom:8px;}
+    #message{color:green;font-weight:bold;margin-top:10px;min-height:1.1em;}
+    #report{margin-top:20px;background:#fff;padding:10px;border-radius:8px;display:flex;gap:12px;align-items:center;}
+    /* small fixed chart box */
+    .chart-box{width:150px;height:150px;display:inline-block;}
+    .chart-box canvas{width:150px !important;height:150px !important;}
+    button{margin-top:8px;margin-right:6px;}
   </style>
 </head>
 <body>
 
-  <h2>Exercise 1 — Student Attendance Table</h2>
-  <nav class="navbar">
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Attendance List</a></li>
-    <li><a href="#">Add Student</a></li>
-    <li><a href="#">Reports</a></li>
-    <li><a href="#">Logout</a></li>
-  </ul>
-</nav>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Attendance List</a>
+    <a href="#">Add Student</a>
+    <a href="#">Reports</a>
+    <a href="#">Logout</a>
+  </nav>
 
-  <table>
+  <h2>Attendance Table</h2>
+  <table id="attendanceTable">
     <thead>
       <tr>
-        <th>Student ID</th>
-        <th>Last Name</th>
-        <th>First Name</th>
-        <th>Course</th>
-        <th colspan="2">Section Date</th>
-      </tr>
-
-      <tr>
-        <th colspan="4"></th>
-        <th>Participated</th>
-        <th>Present</th>
+        <th>Last Name</th><th>First Name</th>
+        <th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th><th>S6</th>
+        <th>Absences</th><th>Participation</th><th>Message</th>
       </tr>
     </thead>
-
     <tbody>
       <tr>
-        <td> 31353614</td>
-        <td>sarah</td>
-        <td>khecha</td>
-        <td>paw</td>
-        <td> <input type= "checkbox" name = "Participated "> </td>
-        <td> <input type= "checkbox" name = "Present "> </td>
+        <td>Ahmed</td><td>Sara</td>
+        <td><input type="checkbox" checked></td><td><input type="checkbox" checked></td>
+        <td><input type="checkbox"></td><td><input type="checkbox"></td>
+        <td><input type="checkbox"></td><td><input type="checkbox"></td>
+        <td></td><td></td><td></td>
       </tr>
-
-   <tr>
-        <td> 313586753</td>
-        <td>feriel</td>
-        <td>khoukhi</td>
-        <td>paw</td>
-        <td> <input type= "checkbox" name = "Participated "> </td>
-        <td> <input type= "checkbox" name = "Present "> </td>
+      <tr>
+        <td>Yacine</td><td>Ali</td>
+        <td><input type="checkbox" checked></td><td><input type="checkbox"></td>
+        <td><input type="checkbox" checked></td><td><input type="checkbox" checked></td>
+        <td><input type="checkbox" checked></td><td><input type="checkbox" checked></td>
+        <td></td><td></td><td></td>
       </tr>
-       <tr>
-        <td> 3135389974</td>
-        <td>alex</td>
-        <td>ford</td>
-        <td>paw</td>
-        <td> <input type= "checkbox" name = "Participated "> </td>
-        <td> <input type= "checkbox" name = "Present "> </td>
+      <tr>
+        <td>Houcine</td><td>Rania</td>
+        <td><input type="checkbox" checked></td><td><input type="checkbox" checked></td>
+        <td><input type="checkbox"></td><td><input type="checkbox" checked></td>
+        <td><input type="checkbox" checked></td><td><input type="checkbox"></td>
+        <td></td><td></td><td></td>
       </tr>
     </tbody>
   </table>
 
- 
-  <h1> new student</h1>
-  <h3> student ID : </h3> <INPUT  type="text" name="student ID">
-  <h3> last name : </h3> <INPUT  type="text" name="last name">
-  <h3> first name: </h3> <INPUT  type="text" name="first name">
-  <h3> email : </h3> <INPUT  type="email" name="email">
-  <button type="submit"> submit </button>
-<script>
-  // Select the submit button
-  const button = document.querySelector("button");
+  <h3>Add New Student</h3>
+  <form id="addStudentForm" novalidate>
+    <label>Student ID:</label>
+    <input type="text" id="studentId"><br>
+    <span class="error" id="idError"></span>
 
-  button.addEventListener("click", function() {
-    // Get input values
-    const id = document.querySelector('input[name="student ID"]').value;
-    const last = document.querySelector('input[name="last name"]').value;
-    const first = document.querySelector('input[name="first name"]').value;
-    const email = document.querySelector('input[name="email"]').value;
+    <label>Last Name:</label>
+    <input type="text" id="lastName"><br>
+    <span class="error" id="lastError"></span>
 
-    // Get the table body
-    const tableBody = document.querySelector("tbody");
+    <label>First Name:</label>
+    <input type="text" id="firstName"><br>
+    <span class="error" id="firstError"></span>
 
-    // Create a new row and fill it
-    const newRow = document.createElement("tr");
-    newRow.innerHTML =
-      "<td>" + id + "</td>" +
-      "<td>" + last + "</td>" +
-      "<td>" + first + "</td>" +
-      "<td>" + email + "</td>" +
-      "<td><input type='checkbox' name='Participated'></td>" +
-      "<td><input type='checkbox' name='Present'></td>";
+    <label>Email:</label>
+    <input type="text" id="email"><br>
+    <span class="error" id="emailError"></span>
 
-    // Add the new row to the table
-    tableBody.appendChild(newRow);
+    <button type="submit">Submit</button>
+  </form>
 
-    // Clear input fields
-    document.querySelector('input[name="student ID"]').value = "";
-    document.querySelector('input[name="last name"]').value = "";
-    document.querySelector('input[name="first name"]').value = "";
-    document.querySelector('input[name="email"]').value = "";
-  });
-</script>
+  <div id="message" aria-live="polite"></div>
+
+  <div style="margin-top:12px;">
+    <button id="showReport">Show Report</button>
+    <button id="highlightExcellent">Highlight Excellent Students</button>
+    <button id="resetColors">Reset Colors</button>
+  </div>
+
+  <div id="report" style="display:none;">
+    <div class="chart-box"><canvas id="absenceChart"></canvas></div>
+    <div id="report-stats" style="font-size:14px;"></div>
+  </div>
+
+  <script>
+    // DOM refs
+    const table = document.getElementById("attendanceTable");
+    const form = document.getElementById("addStudentForm");
+    const idInput = document.getElementById("studentId");
+    const lastInput = document.getElementById("lastName");
+    const firstInput = document.getElementById("firstName");
+    const emailInput = document.getElementById("email");
+    const idErr = document.getElementById("idError");
+    const lastErr = document.getElementById("lastError");
+    const firstErr = document.getElementById("firstError");
+    const emailErr = document.getElementById("emailError");
+    const msg = document.getElementById("message");
+    const reportStats = document.getElementById("report-stats");
+    let chartInstance = null;
+
+    function updateTable(){
+      const rows = table.querySelectorAll("tbody tr");
+      rows.forEach(row=>{
+        const cbs = row.querySelectorAll("input[type='checkbox']");
+        let abs = 0, par = 0;
+        cbs.forEach(cb => cb.checked ? par++ : abs++);
+        if(cbs.length === 0){ abs = 6; par = 0; } // safety
+        row.children[8].textContent = abs + " Abs";
+        row.children[9].textContent = par + " Par";
+        let m = "";
+        if(abs < 3){ row.className = "green"; m = "Good attendance – Excellent participation"; }
+        else if(abs <= 4){ row.className = "yellow"; m = "Warning – attendance low – participate more"; }
+        else { row.className = "red"; m = "Excluded – too many absences"; }
+        row.children[10].textContent = m;
+      });
+    }
+    updateTable();
+
+    table.addEventListener("change", e => { if(e.target && e.target.type === "checkbox") updateTable(); });
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      idErr.textContent = lastErr.textContent = firstErr.textContent = emailErr.textContent = "";
+      msg.textContent = "";
+      let valid = true;
+      if(!/^[0-9]+$/.test(idInput.value.trim())){ idErr.textContent = "Numbers only"; valid = false; }
+      if(!/^[A-Za-z]+$/.test(lastInput.value.trim())){ lastErr.textContent = "Letters only"; valid = false; }
+      if(!/^[A-Za-z]+$/.test(firstInput.value.trim())){ firstErr.textContent = "Letters only"; valid = false; }
+      if(!/^[^@]+@[^@]+\.[a-z]+$/.test(emailInput.value.trim())){ emailErr.textContent = "Invalid email"; valid = false; }
+      if(!valid) return;
+
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${lastInput.value.trim()}</td>
+        <td>${firstInput.value.trim()}</td>
+        ${"<td><input type='checkbox'></td>".repeat(6)}
+        <td></td><td></td><td></td>
+      `;
+      table.querySelector("tbody").appendChild(newRow);
+      updateTable();
+      form.reset();
+      msg.textContent = "Student added successfully!";
+      setTimeout(()=>msg.textContent="",3000);
+    });
+
+    // Small doughnut chart display
+    document.getElementById("showReport").addEventListener("click", () => {
+      const rows = table.querySelectorAll("tbody tr");
+      const totalStudents = rows.length;
+      let totalAbsences = 0;
+      rows.forEach(r => { const n = parseInt(r.children[8].textContent) || 0; totalAbsences += n; });
+      const totalPossible = totalStudents * 6;
+      const present = Math.max(0, totalPossible - totalAbsences);
+
+      // show stats text
+      reportStats.innerHTML = `<strong>Total students:</strong> ${totalStudents}<br>
+                               <strong>Total present (across sessions):</strong> ${present}<br>
+                               <strong>Total absences (across sessions):</strong> ${totalAbsences}`;
+
+      document.getElementById("report").style.display = "flex";
+
+      // destroy previous chart if exists
+      if(chartInstance){ chartInstance.destroy(); chartInstance = null; }
+
+      const ctx = document.getElementById("absenceChart").getContext("2d");
+      chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Present','Absent'],
+          datasets: [{ data: [present, totalAbsences], backgroundColor: ['#4caf50','#f44336'] }]
+        },
+        options: {
+          responsive: false,        // let canvas control final pixels
+          maintainAspectRatio: false,
+          plugins: { title: { display: true, text: 'Attendance Report' } }
+        }
+      });
+    });
+
+    /* ---------- jQuery Exercises 5 & 6 ---------- */
+    $(function(){
+      // Hover highlight (outline)
+      $("#attendanceTable tbody").on("mouseenter","tr", function(){ $(this).css("outline","2px solid #0077cc"); })
+                                 .on("mouseleave","tr", function(){ $(this).css("outline","none"); });
+
+      // Click row -> alert name + absences
+      $("#attendanceTable tbody").on("click","tr", function(){
+        const last = $(this).children("td").eq(0).text();
+        const first = $(this).children("td").eq(1).text();
+        const abs = $(this).children("td").eq(8).text();
+        alert(`${last} ${first} has ${abs}`);
+      });
+
+      // Highlight Excellent Students (<3 absences): fade animation
+      $("#highlightExcellent").on("click", function(){
+        $("#attendanceTable tbody tr").each(function(){
+          const abs = parseInt($(this).children("td").eq(8).text()) || 0;
+          if(abs < 3){ $(this).fadeOut(180).fadeIn(180); }
+        });
+      });
+
+      // Reset Colors -> remove outlines and re-run updateTable to restore classes
+      $("#resetColors").on("click", function(){
+        $("#attendanceTable tbody tr").css("outline","none");
+        updateTable();
+      });
+    });
+  </script>
 </body>
 </html>
+
+
+
